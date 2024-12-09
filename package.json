@@ -14,6 +14,7 @@
     "vite": "^6.0.1"
   },
   "dependencies": {
+    "hackathon-keanutaufan": "file:",
     "three": "^0.171.0"
   }
 }

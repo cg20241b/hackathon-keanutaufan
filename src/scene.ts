@@ -16,6 +16,7 @@ export class Scene {
   private alphabetMesh: THREE.Mesh;
   private digitMesh: THREE.Mesh;
   private targetCameraPosition: THREE.Vector3;
+  private pointLight: THREE.PointLight
 
   constructor() {
     this.scene = new THREE.Scene();
@@ -32,6 +33,7 @@ export class Scene {
     this.alphabetMesh = new THREE.Mesh();
     this.digitMesh = new THREE.Mesh();
     this.targetCameraPosition = new THREE.Vector3(0, 0, 5);
+    this.pointLight = new THREE.PointLight(0xffffff, 10, 100);
   }
 
   public initialize(): void {
@@ -52,6 +54,7 @@ export class Scene {
       },
     });
     this.cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
+    this.cube.add(this.pointLight);
     this.scene.add(this.cube);
 
     // Load font and create text meshes
