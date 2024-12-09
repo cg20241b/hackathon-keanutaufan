@@ -101,6 +101,7 @@ export class Scene {
         lightPosition: { value: this.cube.position },
         baseColor: { value: new THREE.Color(0xff00ff) }, // Should be c5a5bf, but then again not suitable with such intensity
         ambientIntensity: { value: 0.242 }, // Same calculation
+        attenuationFactor: { value: 1.0 },
       },
     });
 
