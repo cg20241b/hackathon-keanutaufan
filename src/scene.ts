@@ -15,6 +15,7 @@ export class Scene {
   private cube: THREE.Mesh;
   private alphabetMesh: THREE.Mesh;
   private digitMesh: THREE.Mesh;
+  private targetCameraPosition: THREE.Vector3;
 
   constructor() {
     this.scene = new THREE.Scene();
@@ -30,6 +31,7 @@ export class Scene {
     this.cube = new THREE.Mesh();
     this.alphabetMesh = new THREE.Mesh();
     this.digitMesh = new THREE.Mesh();
+    this.targetCameraPosition = new THREE.Vector3(0, 0, 5);
   }
 
   public initialize(): void {
@@ -112,6 +114,14 @@ export class Scene {
 
   private animate(): void {
     requestAnimationFrame(() => this.animate());
+    
+    // Smooth camera movement
+    this.camera.position.lerp(this.targetCameraPosition, 0.1);
+    
+    // Update cube's time uniform
+    const cubeMaterial = this.cube.material as THREE.ShaderMaterial;
+    cubeMaterial.uniforms.time.value = performance.now() * 0.001;
+    
     this.renderer.render(this.scene, this.camera);
   }
 
@@ -125,10 +135,10 @@ export class Scene {
           this.cube.position.y -= 0.1;
           break;
         case "a":
-          this.camera.position.x -= 0.1;
+          this.targetCameraPosition.x -= 0.1;
           break;
         case "d":
-          this.camera.position.x += 0.1;
+          this.targetCameraPosition.x += 0.1;
           break;
       }
     });
